@@ -1,15 +1,18 @@
 #include <iostream>
 
+// Fraction class to have cleaner input output
 class Fraction {
     public:
         int numerator;
         int denominator;
 
         Fraction(int numerator, int denominator): numerator(numerator), denominator(denominator) {}
+        // tostring function to print fractions
         std::string to_string() {
             return std::to_string(numerator) + "/" + std::to_string(denominator);
         }
 
+        // == operator to make comparison easier
         bool operator==(Fraction &other) {
             return this->numerator == other.numerator && this->denominator == other.denominator;
         }
