@@ -19,8 +19,7 @@ class Fraction {
 bool power_of_two(int number);
 bool power_of_two_noloop(int number);
 bool is_prime(int number);
-void reduce(int num, int num2);
-void test_power_of_two(int num);
+void test_power_of_two();
 void test_prime_numbers();
 void test_reduce();
 Fraction reduce (Fraction input);
@@ -28,7 +27,12 @@ Fraction reduce (Fraction input);
 int main() {
 
     test_reduce();
+    std::cout << std::endl;
+
     test_prime_numbers();
+    std::cout << std::endl;
+
+    test_power_of_two();
 
     return 0;
 
@@ -66,7 +70,7 @@ bool is_prime(int number) {
 
 Fraction reduce (Fraction input) {
     if (input.denominator == 0) {
-        std::cout << "Division by 0, fraction can't be reduced - FAIL" << std::endl;
+        std::cout << "Division by 0, fraction can't be reduced" << std::endl;
         return input;
     }
     int numerator = input.numerator;
@@ -89,18 +93,47 @@ Fraction reduce (Fraction input) {
 
 }
 
-void test_power_of_two(int num) {
-    std::cout << "Testing power of two function using loops" << std::endl;
-    if (power_of_two(num))
-        printf("%d is a power of two - PASS\n", num);
-    else
-        printf("%d is not a power of two - FAIL\n", num);
+void test_power_of_two() {
+    int inputs[6] = {1, 2, 16, 34, 60, 128};
+    bool expected[6] = {true, true, true, false, false, true};
+
+    std::cout << "Testing power of two function using a loop" << std::endl;
+    for (int i = 0; i < 6; i++) {
+        int input = inputs[i];
+        bool actual = power_of_two(inputs[i]);
+        bool expect = expected[i];
+
+        if (actual == expect) {
+            if (actual == true)
+                std::cout << "PASS! " << input << " is a power of two" << std::endl;
+            else
+                std::cout << "PASS! " << input << " is not a power of two" << std::endl;
+        }
+        else
+            std::cout << "FAIL! At testcase " << i << " - expected value was" <<
+                expect << " while actual value was " << actual << std::endl;
+    }
+
+    int newInputs[6] = {2, 4, 6, 8, 127, 256};
+    bool newExpected[6] = {true, true, false, true, false, true};
 
     std::cout << "\nTesting power of two function using bitwise logic" << std::endl;
-    if (power_of_two_noloop(num))
-        printf("%d is a power of two - PASS\n", num);
-    else
-        printf("%d is not a power of two - FAIL\n", num);
+    for (int i = 0; i < 6; i++) {
+        int input = newInputs[i];
+        bool actual = power_of_two_noloop(input);
+        bool expect = newExpected[i];
+
+        if (actual == expect) {
+            if (actual == true)
+                std::cout << "PASS! " << input << " is a power of two" << std::endl;
+            else
+                std::cout << "PASS! " << input << " is not a power of two" << std::endl;
+        }
+        else
+            std::cout << "FAIL! At testcase " << i << " - expected value was" <<
+                expect << " while actual value was " << actual << std::endl;
+    }
+
 
 }
 
@@ -111,26 +144,29 @@ void test_prime_numbers() {
     for (int i = 0; i < 5; i++) {
         int input = inputs[i];
         bool result = is_prime(input);
-        if (result == expected[i]) {
+        bool expect = expected[i];
+        if (result == expect) {
             if (result == true)
                 std::cout << "PASS! " << input << " is a prime number" << std::endl;
             else
                 std::cout << "PASS! " << input << " is not a prime number" << std::endl;
         }
         else
-            std::cout << "FAIL! At testcase " << i << " - expected was " << expected[i] <<
+            std::cout << "FAIL! At testcase " << i << " - expected was " << expect <<
                 " while actual was " << result << std::endl;
     }
 }
 
 void test_reduce() {
-    Fraction inputs[4] = {Fraction(1,2), Fraction(2, 4),
-                            Fraction(4, 2), Fraction(6, 8)};
+    Fraction inputs[6] = {Fraction(1,2), Fraction(2, 4),
+                            Fraction(4, 2), Fraction(6, 8),
+                            Fraction(-8, 2), Fraction(4, 0)};
 
-    Fraction expected[4] = {Fraction(1, 2), Fraction(1, 2),
-                            Fraction(2, 1), Fraction(3, 4)};
+    Fraction expected[6] = {Fraction(1, 2), Fraction(1, 2),
+                            Fraction(2, 1), Fraction(3, 4),
+                            Fraction(-4, 1), Fraction(4, 0)};
 
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 6; i++) {
         Fraction input = inputs[i];
         Fraction actual = reduce(inputs[i]);
         Fraction expect = expected[i];
