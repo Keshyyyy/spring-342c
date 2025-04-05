@@ -16,6 +16,8 @@ class Fraction {
         bool operator==(Fraction &other) {
             return this->numerator == other.numerator && this->denominator == other.denominator;
         }
+
+
 };
 
 
@@ -113,7 +115,7 @@ void test_power_of_two() {
                 std::cout << "PASS! " << input << " is not a power of two" << std::endl;
         }
         else
-            std::cout << "FAIL! At testcase " << i << " - expected value was" <<
+            std::cout << "FAIL! At testcase " << i + 1 << " - expected value was" <<
                 expect << " while actual value was " << actual << std::endl;
     }
 

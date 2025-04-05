@@ -1,0 +1,9 @@
+Printing in C++ - std::cout (console out) << input << std::endl (endline)
+Boolean == and other operators can be defined in C++ classes to operate differently than their
+base versions
+Array in c++ is defined statically (for now), to declare a dynamic array put a pointer and allocate
+memory for that array
+C++ can operate directly with bits as I learned from checking if a number is a power of two, 1000 = power of two
+but 0111 is not
+& operator vs && operator - && is the boolean and, & returns the memory address of the variable proceeding it, useful
+in method headers and inputs
